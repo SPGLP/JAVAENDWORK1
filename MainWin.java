@@ -46,12 +46,14 @@ public class MainWin {
         String lsl_StuNumber;                    // 学生学号
         String lsl_CourseClass;                  // 学生班级
         int[] lsl_StuPoint = new int[5];         // 学生成绩，lsl_StuPoint[4] 为英语成绩
+        int saveSum = 0;                         // 已保存学生个数
+        Student[] student = new Student[999];    // 批量声明 999 个 Class 数组以保存学生信息
 
         //程序逻辑：
         System.out.println("");
         System.out.println("欢迎进入学生出国留学录入和判断系统");
         System.out.println("");
-        System.out.println("操作指南：1-学生出国留学资格判断；2-退出系统；3-符合条件的人数统计；4-不符合条件的人数统计");
+        System.out.println("操作指南：1-学生出国留学资格判断；2-退出系统；3-符合条件的人数统计；4-不符合条件的人数统计；5-输出人员信息");
         System.out.println("");
         do {
             System.out.print("指令 > ");
@@ -73,18 +75,21 @@ public class MainWin {
                     }
                     System.out.print("请输入英语成绩：");
                     lsl_StuPoint[4] = scan.nextInt();
-                    Student student = new Student(  
+                    student[saveSum] = new Student(  
                                                     lsl_StuName, 
                                                     lsl_StuSex, 
                                                     lsl_StuNumber, 
                                                     lsl_CourseClass, 
                                                     lsl_StuPoint
                                                 );
-                    if (student.lsl_canStudyAbroad()) {
+                    if (student[saveSum].lsl_canStudyAbroad()) {
                         System.out.println("该学生满足出国留学的资格");
                     } else {
                         System.out.println("该学生不满足出国留学的资格");
                     }
+                    System.out.println("已保存该学生信息");
+                    saveSum ++;                             // 已保存学生个数自加
+                    System.out.println("");
                     break;
                 case 2:
                     System.out.println("退出系统");
@@ -93,8 +98,17 @@ public class MainWin {
                     System.out.println("符合条件的人数统计"); break;
                 case 4:
                     System.out.println("不符合条件的人数统计"); break;
+                case 5:
+                    // 输出人员信息逻辑：
+                    System.out.println("所有保存的学生信息如下：");
+                    System.out.println("");
+                    for (int i = 0; i < saveSum; i++) {
+                        System.out.println("姓名:" + student[i].name);
+                    }
+                    System.out.println("========================");
                 default:
-                    System.out.println("未知操作，请查阅操作指南并检查输入的指令"); break;
+                    System.out.println("未知操作，请查阅操作指南并检查输入的指令");
+                    System.out.println(""); break;
             }
         } while (!shouldExit);
     }
