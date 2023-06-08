@@ -7,6 +7,7 @@ public class Student {
     String studentNumber;           // 学号
     String courseClass;             // 班级
     int[] point = new int[5];       // 成绩，其中 point[4] 为英语
+    boolean canSA;                  // 是否能出国留学标记
 
     public Student(String n, int s, String sn, String cc, int[] p) {
         this.name = n;

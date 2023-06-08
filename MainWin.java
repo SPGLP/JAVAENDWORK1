@@ -84,8 +84,10 @@ public class MainWin {
                                                 );
                     if (student[saveSum].lsl_canStudyAbroad()) {
                         System.out.println("该学生满足出国留学的资格");
+                        student[saveSum].canSA = true;
                     } else {
                         System.out.println("该学生不满足出国留学的资格");
+                        student[saveSum].canSA = false;
                     }
                     System.out.println("已保存该学生信息");
                     saveSum ++;                             // 已保存学生个数自加
