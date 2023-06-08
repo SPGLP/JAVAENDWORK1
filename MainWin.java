@@ -1,7 +1,5 @@
 //问题二 # 第 1 问
 
-package SubQ1;
-
 import java.util.*;
 import java.util.Scanner;
 
