@@ -1,3 +1,5 @@
+// 第三问 # 问题 2
+
 public class SpecialStudent extends Student {
 
     public SpecialStudent(String n, int s, String sn, String cc, int[] p) {
