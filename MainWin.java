@@ -1,4 +1,4 @@
-//问题二 # 第 2 问
+//问题二 # 第 4 问
 
 import java.util.*;
 import java.util.Scanner;
