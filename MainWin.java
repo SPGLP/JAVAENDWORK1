@@ -48,6 +48,7 @@ public class MainWin {
         int[] lsl_StuPoint = new int[5];         // 学生成绩，lsl_StuPoint[4] 为英语成绩
         int saveSum = 0;                         // 已保存学生个数
         Student[] student = new Student[999];    // 批量声明 999 个 Class 数组以保存学生信息
+        int sumSA;                               // 符合或不符合出国留学资格学生总数
 
         //程序逻辑：
         System.out.println("");
@@ -97,9 +98,25 @@ public class MainWin {
                     System.out.println("退出系统");
                     shouldExit = true; break;
                 case 3:
-                    System.out.println("符合条件的人数统计"); break;
+                    // 符合条件的人数统计逻辑：
+                    sumSA = 0;
+                    for (int i = 0; i < saveSum; i++) {
+                        if (student[i].canSA) {
+                            sumSA ++;
+                        }
+                    }
+                    System.out.println("符合留学资格学生总数：" + sumSA);
+                    System.out.println(""); break;
                 case 4:
-                    System.out.println("不符合条件的人数统计"); break;
+                   // 不符合条件的人数统计逻辑：
+                    sumSA = 0;
+                    for (int i = 0; i < saveSum; i++) {
+                        if (!student[i].canSA) {
+                            sumSA ++;
+                        }
+                    }
+                    System.out.println("不符合留学资格学生总数：" + sumSA);
+                    System.out.println(""); break;
                 case 5:
                     // 输出人员信息逻辑：
                     System.out.println("所有保存的学生信息如下：");
