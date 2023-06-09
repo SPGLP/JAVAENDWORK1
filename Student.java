@@ -8,6 +8,7 @@ public class Student {
     String courseClass;             // 班级
     int[] point = new int[5];       // 成绩，其中 point[4] 为英语
     boolean canSA;                  // 是否能出国留学标记
+    boolean spcStudent;             // 是否特殊人才标记
 
     public Student(String n, int s, String sn, String cc, int[] p) {
         this.name = n;
@@ -19,15 +20,15 @@ public class Student {
         }
     }
 
-    // canStudyAbroad() 
+    // lsl_canStudyAbroad() 
     //
     // 作用：判断学生是符合拥有出国留学的资格
     //
     public void lsl_canStudyAbroad() {
         canSA = true;
-        if (point[4] > 95) {         // 如果英语大于 95
+        if (point[4] > 95) {                // 如果英语大于 95
             for (int i = 0; i < 4; i++) {
-                if (point[i] < 80) { // 如果存在科目小于 80
+                if (point[i] < 80) {        // 如果存在科目小于 80
                     canSA = false;
                     break;  
                 }

@@ -47,7 +47,7 @@ public class MainWin {
         String lsl_CourseClass;                  // 学生班级
         int[] lsl_StuPoint = new int[5];         // 学生成绩，lsl_StuPoint[4] 为英语成绩
         int saveSum = 0;                         // 已保存学生个数
-        Student[] student = new Student[999];    // 批量声明 999 个 Class 数组以保存学生信息
+        SpecialStudent[] student = new SpecialStudent[999];    // 批量声明 999 个 Class 数组以保存学生信息
         int sumSA;                               // 符合或不符合出国留学资格学生总数
 
         //程序逻辑：
@@ -76,14 +76,21 @@ public class MainWin {
                     }
                     System.out.print("请输入英语成绩：");
                     lsl_StuPoint[4] = scan.nextInt();
-                    student[saveSum] = new Student(  
+                    student[saveSum] = new SpecialStudent(  
                                                     lsl_StuName, 
                                                     lsl_StuSex, 
                                                     lsl_StuNumber, 
                                                     lsl_CourseClass, 
                                                     lsl_StuPoint
                                                 );
-                    student[saveSum].lsl_canStudyAbroad();
+                    System.out.print("是否获得互联网+竞赛国家级奖项：（1-是；0-否）：");
+                    if(scan.nextInt() == 1) {
+                        student[saveSum].spcStudent = true;
+                        student[saveSum].lsl_canStudyAbroad(student[saveSum].spcStudent);
+                    } else {
+                        student[saveSum].spcStudent = false;
+                        student[saveSum].lsl_canStudyAbroad();
+                    }
                     System.out.println("已保存该学生信息");
                     saveSum ++;                             // 已保存学生个数自加
                     System.out.println("");
