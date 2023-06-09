@@ -23,17 +23,22 @@ public class Student {
     //
     // 作用：判断学生是符合拥有出国留学的资格
     //
-    boolean lsl_canStudyAbroad() {
-        int i;
-        for (i = 0; i < 4; i++) {   // 判断其它科目成绩是否都大于 80，否则返回 false
-            if (point[i] < 80) {
-                return false;
+    public void lsl_canStudyAbroad() {
+        canSA = true;
+        if (point[4] > 95) {         // 如果英语大于 95
+            for (int i = 0; i < 4; i++) {
+                if (point[i] < 80) { // 如果存在科目小于 80
+                    canSA = false;
+                    break;  
+                }
             }
-        }
-        if (point[4] < 95) {        // 判断英语成绩是否大于 95，是则返回 true，否则返回 false
-            return false;
         } else {
-            return true;
+            canSA = false;
+        }
+        if(canSA) {
+            System.out.println("该学生符合出国留学资格");
+        } else {
+            System.out.println("该学生不符合出国留学资格");
         }
     }
 }

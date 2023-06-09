@@ -71,7 +71,7 @@ public class MainWin {
                     System.out.print("请输入学生班级：");
                     lsl_CourseClass = scan.next();
                     for (int i = 0; i < 4; i++) {
-                        System.out.print("输入第" + (i + 1) + "科成绩");
+                        System.out.print("输入第" + (i + 1) + "科成绩：");
                         lsl_StuPoint[i] = scan.nextInt();
                     }
                     System.out.print("请输入英语成绩：");
@@ -83,13 +83,7 @@ public class MainWin {
                                                     lsl_CourseClass, 
                                                     lsl_StuPoint
                                                 );
-                    if (student[saveSum].lsl_canStudyAbroad()) {
-                        System.out.println("该学生满足出国留学的资格");
-                        student[saveSum].canSA = true;
-                    } else {
-                        System.out.println("该学生不满足出国留学的资格");
-                        student[saveSum].canSA = false;
-                    }
+                    student[saveSum].lsl_canStudyAbroad();
                     System.out.println("已保存该学生信息");
                     saveSum ++;                             // 已保存学生个数自加
                     System.out.println("");
