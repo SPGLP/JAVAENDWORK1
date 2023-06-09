@@ -62,38 +62,42 @@ public class MainWin {
             switch(lsl_opType) {
                 case 1:
                     //学生出国留学资格判断的逻辑：
-                    System.out.print("请输入学生姓名：");
-                    lsl_StuName = scan.next();
-                    System.out.print("请输入学生性别（输入数字：1-男；0-女）：");
-                    lsl_StuSex = scan.nextInt();
-                    System.out.print("请输入学生学号：");
-                    lsl_StuNumber = scan.next();
-                    System.out.print("请输入学生班级：");
-                    lsl_CourseClass = scan.next();
-                    for (int i = 0; i < 4; i++) {
-                        System.out.print("输入第" + (i + 1) + "科成绩：");
-                        lsl_StuPoint[i] = scan.nextInt();
+                    try {
+                        System.out.print("请输入学生姓名：");
+                        lsl_StuName = scan.next();
+                        System.out.print("请输入学生性别（输入数字：1-男；0-女）：");
+                        lsl_StuSex = scan.nextInt();
+                        System.out.print("请输入学生学号：");
+                        lsl_StuNumber = scan.next();
+                        System.out.print("请输入学生班级：");
+                        lsl_CourseClass = scan.next();
+                        for (int i = 0; i < 4; i++) {
+                            System.out.print("输入第" + (i + 1) + "科成绩：");
+                            lsl_StuPoint[i] = scan.nextInt();
+                        }
+                        System.out.print("请输入英语成绩：");
+                        lsl_StuPoint[4] = scan.nextInt();
+                        student[saveSum] = new SpecialStudent(  
+                                                        lsl_StuName, 
+                                                        lsl_StuSex, 
+                                                        lsl_StuNumber, 
+                                                        lsl_CourseClass, 
+                                                        lsl_StuPoint
+                                                    );
+                        System.out.print("是否获得互联网+竞赛国家级奖项：（1-是；0-否）：");
+                        if(scan.nextInt() == 1) {
+                            student[saveSum].spcStudent = true;
+                            student[saveSum].lsl_canStudyAbroad(student[saveSum].spcStudent);
+                        } else {
+                            student[saveSum].spcStudent = false;
+                            student[saveSum].lsl_canStudyAbroad();
+                        }
+                        System.out.println("已保存该学生信息");
+                        saveSum ++;                             // 已保存学生个数自加
+                        System.out.println("");
+                    } catch (Exception e) {                     // 错误处理
+                        System.out.println("发生了错误导致判断和保存失败，请检查您的输入内容是否合法，或者尝试重启程序");
                     }
-                    System.out.print("请输入英语成绩：");
-                    lsl_StuPoint[4] = scan.nextInt();
-                    student[saveSum] = new SpecialStudent(  
-                                                    lsl_StuName, 
-                                                    lsl_StuSex, 
-                                                    lsl_StuNumber, 
-                                                    lsl_CourseClass, 
-                                                    lsl_StuPoint
-                                                );
-                    System.out.print("是否获得互联网+竞赛国家级奖项：（1-是；0-否）：");
-                    if(scan.nextInt() == 1) {
-                        student[saveSum].spcStudent = true;
-                        student[saveSum].lsl_canStudyAbroad(student[saveSum].spcStudent);
-                    } else {
-                        student[saveSum].spcStudent = false;
-                        student[saveSum].lsl_canStudyAbroad();
-                    }
-                    System.out.println("已保存该学生信息");
-                    saveSum ++;                             // 已保存学生个数自加
-                    System.out.println("");
                     break;
                 case 2:
                     System.out.println("退出系统");
