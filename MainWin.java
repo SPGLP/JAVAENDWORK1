@@ -115,14 +115,14 @@ public class MainWin {
                 case 3:
                     // 符合条件的人数统计逻辑：
                     sumSA = 0;
+                    ctd.lsl_DataReadpre();
                     try {
-                        ctd.lsl_DataRead();
                         while (ctd.res.next()) {
+                            ctd.lsl_DataRead();
                             if (ctd.retSA) {
                                 sumSA ++;
                             }
                         }
-                        System.out.println("不符合留学资格学生总数：" + sumSA);
                     } catch (SQLException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -132,9 +132,10 @@ public class MainWin {
                 case 4:
                    // 不符合条件的人数统计逻辑：
                     sumSA = 0;
+                    ctd.lsl_DataReadpre();
                     try {
-                        ctd.lsl_DataRead();
                         while (ctd.res.next()) {
+                            ctd.lsl_DataRead();
                             if (!ctd.retSA) {
                                 sumSA ++;
                             }
@@ -150,7 +151,7 @@ public class MainWin {
                     System.out.println("所有保存的学生信息如下：");
                     System.out.println("");
                     try {
-                        //ctd.lsl_DataRead();
+                        ctd.lsl_DataReadpre();
                         while (ctd.res.next()) {
                             ctd.lsl_DataRead();
                             System.out.println(ctd.retName);

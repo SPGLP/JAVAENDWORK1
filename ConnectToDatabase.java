@@ -76,15 +76,27 @@ public class ConnectToDatabase {
         }
     }
 
+    // public void lsl_DataReadpre()
+    // 
+    // 作用：读取数据库操作的初始化
+    //
+    public void lsl_DataReadpre(){
+        String sqlCommand = "select * from studentsinfo";
+        try {
+            psta = cnn.prepareStatement(sqlCommand);
+            res = psta.executeQuery();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
     // public void lsl_DataRead()
     // 
     // 作用：读取数据库，获取学生信息
     //
     public void lsl_DataRead() {
-        String sqlCommand = "select * from studentsinfo";
         try {
-            psta = cnn.prepareStatement(sqlCommand);
-            res = psta.executeQuery();
             retName = res.getString("studentName");
             retSex = res.getInt("studentSex");
             retNum = res.getString("studentNumber");
