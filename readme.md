@@ -12,7 +12,9 @@ connector 版本：mysql-connector-java 8.0.33
 
 数据表名称：studentsinfo
 
-数据表项： id                   |  INT                |  主键、自增
+数据表项： 
+``
+          id                   |  INT                |  主键、自增
 
           studentName          |  VARCHAR(45)   
 
@@ -35,4 +37,4 @@ connector 版本：mysql-connector-java 8.0.33
           studentSP            |  TINYINT(BOOLEAN)
 
           studentSA            |  TINYINT(BOOLEAN)
-          
+``
