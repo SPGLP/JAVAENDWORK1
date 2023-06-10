@@ -13,14 +13,26 @@ connector 版本：mysql-connector-java 8.0.33
 数据表名称：studentsinfo
 
 数据表项： id                   |  INT                |  主键、自增
+
           studentName          |  VARCHAR(45)   
+
           studentSex           |  INT
+
           studentNumber        |  VARCHAR(45)
+
           studentCourseClass   |  VARCHAR(45)
+
           studentPointEnglish  |  INT
+
           studentPointOne      |  INT
+
           studentPointTwo      |  INT
+
           studentPointThree    |  INT
+
           studentPointFour     |  INT
+
           studentSP            |  TINYINT(BOOLEAN)
+
           studentSA            |  TINYINT(BOOLEAN)
+          
