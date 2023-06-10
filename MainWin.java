@@ -1,5 +1,6 @@
-//问题二 # 第 4 问
+// 第四问 # 问题 2
 
+import java.sql.SQLException;
 import java.util.*;
 import java.util.Scanner;
 
@@ -47,13 +48,15 @@ public class MainWin {
         String lsl_CourseClass;                  // 学生班级
         int[] lsl_StuPoint = new int[5];         // 学生成绩，lsl_StuPoint[4] 为英语成绩
         int saveSum = 0;                         // 已保存学生个数
-        SpecialStudent[] student = new SpecialStudent[999];    // 批量声明 999 个 Class 数组以保存学生信息
+        SpecialStudent student;                  // 批量声明 999 个 Class 数组以保存学生信息
+        ConnectToDatabase ctd = new ConnectToDatabase(); // 引入数据库连接类以使用连接方法
         int sumSA;                               // 符合或不符合出国留学资格学生总数
 
         //程序逻辑：
         System.out.println("");
         System.out.println("欢迎进入学生出国留学录入和判断系统");
         System.out.println("");
+        ctd.lsl_getConnection();
         System.out.println("操作指南：1-学生出国留学资格判断；2-退出系统；3-符合条件的人数统计；4-不符合条件的人数统计；5-输出人员信息");
         System.out.println("");
         do {
@@ -77,7 +80,7 @@ public class MainWin {
                         }
                         System.out.print("请输入英语成绩：");
                         lsl_StuPoint[4] = scan.nextInt();
-                        student[saveSum] = new SpecialStudent(  
+                        student = new SpecialStudent(  
                                                         lsl_StuName, 
                                                         lsl_StuSex, 
                                                         lsl_StuNumber, 
@@ -86,14 +89,15 @@ public class MainWin {
                                                     );
                         System.out.print("是否获得互联网+竞赛国家级奖项：（1-是；0-否）：");
                         if(scan.nextInt() == 1) {
-                            student[saveSum].spcStudent = true;
-                            student[saveSum].lsl_canStudyAbroad(student[saveSum].spcStudent);
+                            student.spcStudent = true;
+                            student.lsl_canStudyAbroad(student.spcStudent);
                         } else {
-                            student[saveSum].spcStudent = false;
-                            student[saveSum].lsl_canStudyAbroad();
+                            student.spcStudent = false;
+                            student.lsl_canStudyAbroad();
                         }
+                        ctd.lsl_dataAdd(student.name, student.sex, student.studentNumber, student.courseClass, student.point, student.spcStudent, student.canSA);
+                        // 写入数据库
                         System.out.println("已保存该学生信息");
-                        saveSum ++;                             // 已保存学生个数自加
                         System.out.println("");
                     } catch (Exception e) {                     // 错误处理
                         System.out.println("发生了错误导致判断和保存失败，请检查您的输入内容是否合法，或者尝试重启程序");
@@ -101,35 +105,61 @@ public class MainWin {
                     break;
                 case 2:
                     System.out.println("退出系统");
+                    try {
+                        ctd.cnn.close();
+                    } catch (SQLException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
                     shouldExit = true; break;
                 case 3:
                     // 符合条件的人数统计逻辑：
                     sumSA = 0;
-                    for (int i = 0; i < saveSum; i++) {
-                        if (student[i].canSA) {
-                            sumSA ++;
+                    try {
+                        ctd.lsl_DataRead();
+                        while (ctd.res.next()) {
+                            if (ctd.retSA) {
+                                sumSA ++;
+                            }
                         }
+                        System.out.println("不符合留学资格学生总数：" + sumSA);
+                    } catch (SQLException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
                     }
                     System.out.println("符合留学资格学生总数：" + sumSA);
                     System.out.println(""); break;
                 case 4:
                    // 不符合条件的人数统计逻辑：
                     sumSA = 0;
-                    for (int i = 0; i < saveSum; i++) {
-                        if (!student[i].canSA) {
-                            sumSA ++;
+                    try {
+                        ctd.lsl_DataRead();
+                        while (ctd.res.next()) {
+                            if (!ctd.retSA) {
+                                sumSA ++;
+                            }
                         }
+                        System.out.println("不符合留学资格学生总数：" + sumSA);
+                    } catch (SQLException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
                     }
-                    System.out.println("不符合留学资格学生总数：" + sumSA);
                     System.out.println(""); break;
                 case 5:
                     // 输出人员信息逻辑：
                     System.out.println("所有保存的学生信息如下：");
                     System.out.println("");
-                    for (int i = 0; i < saveSum; i++) {
-                        System.out.println("姓名:" + student[i].name);
+                    try {
+                        //ctd.lsl_DataRead();
+                        while (ctd.res.next()) {
+                            ctd.lsl_DataRead();
+                            System.out.println(ctd.retName);
+                        }
+                        System.out.println("========================");
+                    } catch (SQLException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
                     }
-                    System.out.println("========================");
                 default:
                     System.out.println("未知操作，请查阅操作指南并检查输入的指令");
                     System.out.println(""); break;

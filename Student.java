@@ -1,4 +1,4 @@
-//第二题 # 问题4
+// 第四问 # 问题 2
 
 public class Student {
     //变量声明：
@@ -9,6 +9,7 @@ public class Student {
     int[] point = new int[5];       // 成绩，其中 point[4] 为英语
     boolean canSA;                  // 是否能出国留学标记
     boolean spcStudent;             // 是否特殊人才标记
+    ConnectToDatabase ctd;          // 引入数据库连接类
 
     public Student(String n, int s, String sn, String cc, int[] p) {
         this.name = n;
