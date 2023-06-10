@@ -48,7 +48,7 @@ public class ConnectToDatabase {
         return cnn;
     }
 
-    // public void dataAdd()
+    // public void lsl_dataAdd()
     // 
     // 作用：将学生数据写入数据库
     //
