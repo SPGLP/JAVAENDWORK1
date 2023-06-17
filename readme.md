@@ -9,6 +9,7 @@ connector 版本：mysql-connector-java 8.0.33
 密码：LslSql114514
 
 数据库名称：studentsinfo_javawork
+数据库编码：utf8mb3_general_ci
 
 数据表名称：studentsinfo
 
