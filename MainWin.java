@@ -106,6 +106,8 @@ public class MainWin {
                 case 2:
                     System.out.println("退出系统");
                     try {
+                        ctd.res.close();
+                        ctd.psta.close();
                         ctd.cnn.close();
                     } catch (SQLException e) {
                         // TODO Auto-generated catch block
